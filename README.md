@@ -1,0 +1,2 @@
+# udacity-data-engineering-nanodegree-sparkify-data-lake
+This is the #4 project in udacity Data Engineering Nano Degree Program. The project is about an imaginary company Sparkify that had their user base grow and want to move their data into a Data Lake. We're tasked with loading data from s3 into the Data Lake, processing data into dimensional model and then loading it back to S3 as parquet files.
