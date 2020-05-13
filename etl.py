@@ -38,12 +38,6 @@ def process_song_data(spark, input_data, output_data):
     .parquet(output_data + 'songs')
 
     # extract columns to create artists table
-    # todo from nb didn't work remove
-#     artists_table = df[['artist_id', 'artist_name', 'artist_location', 'artist_latitude', 'artist_longitude']] \
-#     .withColumn('artist_latitude', df["artist_latitude"].cast(DecimalType())) \
-#     .withColumn('artist_longitude', df['artist_longitude'].cast(DecimalType())) \
-#     .selectExpr('artist_id', 'artist_name as name', 'artist_location as location',
-#             'artist_latitude as latitude', 'artist_longitude as longitude')
     artists_table = df.withColumn('artist_latitude', df["artist_latitude"].cast(DecimalType())) \
     .withColumn('artist_longitude', df['artist_longitude'].cast(DecimalType())) \
     .selectExpr('artist_id', 'artist_name as name', 'artist_location as location',
