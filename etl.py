@@ -16,6 +16,11 @@ os.environ['AWS_SECRET_ACCESS_KEY']=config['AWS_SECRET_ACCESS_KEY']
 
 
 def create_spark_session():
+    """Creates a spark session with the default parameters.
+    SparkSession is the entry point to interact with DataFrame and Dataset APIs.
+
+    :return: SparkSession, a configured SparkSession
+    """
     spark = SparkSession \
         .builder \
         .appName('etl') \
@@ -25,6 +30,18 @@ def create_spark_session():
 
 
 def process_song_data(spark, input_data, output_data):
+    """Process song data residing in s3. Song data is a collection of JSON files containing description
+    of songs. Data come from the Million Song Data set.
+    It's partitioned by the first Three letters of each song track id.
+
+    Data is loaded from s3. Processed into a dimensional model.
+    Then loaded back to s3 as partitioned parquet files.
+
+    :param spark: SparkSession
+    :param input_data: string, s3a formatted uri to the bucket containing input data
+    :param output_data: string, s3a formatted uri to a bucket where data can be saved to
+    :return: None
+    """
     # get filepath to song data file
     song_data = input_data + 'song_data/*/*/*/*.json'
 
@@ -51,6 +68,18 @@ def process_song_data(spark, input_data, output_data):
 
 
 def process_log_data(spark, input_data, output_data):
+    """Process log data residing in s3. log data is a collection of JSON files containing description
+    of user events. Data come from an event simulator.
+    It's partitioned by year and month.
+
+    Data is loaded from s3. Processed into a dimensional model.
+    Then loaded back to s3 as partitioned parquet files.
+
+    :param spark: SparkSession
+    :param input_data: string, s3a formatted uri to the bucket containing input data
+    :param output_data: string, s3a formatted uri to a bucket where data can be saved to
+    :return: None
+    """
     # get filepath to log data file
     log_data = input_data + 'log_data/*/*/*.json'
 
